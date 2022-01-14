@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Commande;
 use App\Entity\User;
 use App\Entity\ProductOrdered;
+use App\Entity\Product;
 use App\Entity\ProductsInBasket;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -227,7 +228,7 @@ class CommandeController extends AbstractController
 
 
             $produits = $this->getDoctrine()
-                ->getRepository(ProductsInBasket::class)
+                ->getRepository(Product::class)
                 ->findAll();
             
         }
@@ -251,11 +252,10 @@ class CommandeController extends AbstractController
                         'productPicture' => $product->getPicture(),
                         'size' => $productOrdered->getSize(),
                         'shoesSize' => $productOrdered->getShoessize(),
-                        'quantity' => $productOrdered->getQuantity(),
-                        'IdProductInBasket' => $productOrdered->getIdpib(),
+                        'quantity' => $productOrdered->getQuantite(),
         
                     );
-                    array_push($produitsCommande, $produit);
+                    array_push($produitsCommande,$produit );
                 }
             }
         }
