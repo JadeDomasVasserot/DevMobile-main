@@ -238,7 +238,7 @@ class CommandeController extends AbstractController
             return $response->setStatusCode(500);
         }
         
-        $produitsCommande = array();
+        $produitstab = array();
         
         foreach($productOrdereds as $productOrdered)
         {
@@ -255,13 +255,24 @@ class CommandeController extends AbstractController
                         'quantity' => $productOrdered->getQuantite(),
         
                     );
-                    array_push($produitsCommande,$produit );
+                    array_push($produitstab,$produit);
                 }
+                
             }
+            
         }
+        $co = array(
+            'id' => $commande->getIdcommande(),
+            'date' => $commande->getDate(),
+            'number' => $commande->getNumber(),
+            'amountoutmargin' => $commande->getAmountoutmargin(),
+            'commargin' => $commande->getCommargin(),
+            'totalamount' => $commande->getTotalamount(),
+            'produit' => $produitstab,
+        );
                 
         $response = new Response();
-        $response->setContent(json_encode([$produitsCommande]));
+        $response->setContent(json_encode([$co]));
         $response->headers->set('Content-Type', 'application/json');
 
         return $response; 
