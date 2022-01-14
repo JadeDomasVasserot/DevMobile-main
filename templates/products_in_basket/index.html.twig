@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProductsInBasket index{% endblock %}
+
+{% block body %}
+    <h1>ProductsInBasket index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idpib</th>
+                <th>Quantity</th>
+                <th>Size</th>
+                <th>Shoessize</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for products_in_basket in products_in_baskets %}
+            <tr>
+                <td>{{ products_in_basket.idpib }}</td>
+                <td>{{ products_in_basket.quantity }}</td>
+                <td>{{ products_in_basket.size }}</td>
+                <td>{{ products_in_basket.shoessize }}</td>
+                <td>
+                    <a href="{{ path('products_in_basket_show', {'idpib': products_in_basket.idpib}) }}">show</a>
+                    <a href="{{ path('products_in_basket_edit', {'idpib': products_in_basket.idpib}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('products_in_basket_new') }}">Create new</a>
+{% endblock %}
